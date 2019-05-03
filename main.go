@@ -11,10 +11,11 @@ import (
 )
 
 var (
-	name  = flag.String("type", "", "[required] type to store in the map")
-	point = flag.Bool("pointer", false, "store and retrieve pointers to the type")
-	out   = flag.String("out", "", "output file name")
-	pack  = flag.String("package", "", "go package of the new file")
+	name       = flag.String("type", "", "[required] type to store in the map")
+	point      = flag.Bool("pointer", false, "store and retrieve pointers to the type")
+	out        = flag.String("out", "", "output file name")
+	pack       = flag.String("package", "", "go package of the new file")
+	replimport = flag.String("import", "", "replace import path")
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 		os.Exit(2)
 	}
 
-	var Imports []string = []string{"sync", "sync/atomic"}
+	var Imports = []string{"sync", "sync/atomic"}
 
 	var Name string
 	var Subpackage string
@@ -36,7 +37,11 @@ func main() {
 	Name = nameParts[len(nameParts)-1]
 	if len(nameParts) > 1 {
 		FullPackage := strings.Join(nameParts[:len(nameParts)-1], ".")
-		Imports = append(Imports, FullPackage)
+		if *replimport == "" {
+			Imports = append(Imports, FullPackage)
+		} else {
+			Imports = append(Imports, *replimport)
+		}
 		packParts := strings.Split(FullPackage, "/")
 		Subpackage = packParts[len(packParts)-1]
 	}

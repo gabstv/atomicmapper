@@ -9,7 +9,7 @@ atomicmapper is a code generation tool for creating high-performance, scalable, 
 Install atomicmapper.
 
 ```bash
-go install github.com/ninibe/atomicmapper
+go install github.com/gabstv/atomicmapper
 # move to $PATH if $GOPATH/bin is not in your $PATH
 ```
 
@@ -37,8 +37,8 @@ fooMap.Delete("myKey")      // remove pointer from map
 ```
 
 All methods are thread-safe while `Get` is also lock-free.
-Check the example [godoc](https://godoc.org/github.com/ninibe/atomicmapper/test)
+Check the example [godoc](https://godoc.org/github.com/gabstv/atomicmapper/test)
 
 ## usage with gen
 
-See [atomic map typewriter](https://github.com/ninibe/atomicmapper/tree/master/gen)
+See [atomic map typewriter](https://github.com/gabstv/atomicmapper/tree/master/gen)
